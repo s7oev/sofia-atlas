@@ -1,30 +1,49 @@
 const format = (value, digits = 0) => new Intl.NumberFormat('bg-BG', {minimumFractionDigits:digits, maximumFractionDigits:digits}).format(value);
 const quarter = q => { const [year, n] = q.split('-Q'); return `${['I','II','III','IV'][Number(n)-1]} трим. ${year}`; };
-const svg = document.querySelector('#chart');
-const ns = 'http://www.w3.org/2000/svg';
-function add(tag, attributes, text) {const el=document.createElementNS(ns,tag);for(const [key,value] of Object.entries(attributes))el.setAttribute(key,value);if(text)el.textContent=text;svg.append(el);return el;}
-function draw(data){
- const currency=document.querySelector('#currency').value;
- const suffix=currency==='eur'?'€':'лв.';
- const key=`implied_${currency}_per_m2`;
- const last=data.at(-1);
- document.querySelector('#period').textContent=quarter(last.quarter).toUpperCase();
- document.querySelector('#latest').textContent=`${format(last[key])} ${suffix}/м²`;
- svg.replaceChildren();add('title',{id:'chart-title'},`Оценена цена в ${suffix}/м² от ${quarter(data[0].quarter)} до ${quarter(last.quarter)}`);
- const left=65,right=935,top=18,bottom=305;
- const max=Math.ceil(Math.max(...data.map(d=>d[key]))/500)*500;
- const x=i=>left+i/(data.length-1)*(right-left),y=v=>bottom-v/max*(bottom-top);
- for(let i=0;i<=5;i++){const value=max*i/5;add('line',{x1:left,x2:right,y1:y(value),y2:y(value),stroke:'#e8ede7'});add('text',{x:left-12,y:y(value)+4,'text-anchor':'end',fill:'#75877e','font-size':12},format(value));}
- const points=data.map((d,i)=>`${x(i)},${y(d[key])}`);
- add('path',{d:`M ${left},${bottom} L ${points.join(' L ')} L ${right},${bottom} Z`,fill:'#e9f2e9'});
- add('polyline',{points:points.join(' '),fill:'none',stroke:'#278168','stroke-width':3,'stroke-linejoin':'round'});
- data.forEach((d,i)=>{if(d.quarter.endsWith('Q1')&&(Number(d.quarter.slice(0,4))%2===1)){add('text',{x:x(i),y:335,'text-anchor':'middle',fill:'#75877e','font-size':12},d.quarter.slice(0,4));}
- const text=`${quarter(d.quarter)} · ${format(d[key],2)} ${suffix}/м² · ${d.quarterly_change_pct>0?'+':''}${format(d.quarterly_change_pct,1)}% спрямо предходното тримесечие`;
- const p=add('circle',{cx:x(i),cy:y(d[key]),r:5,fill:'#278168',class:'point',tabindex:0,role:'img','aria-label':text});
- const title=document.createElementNS(ns,'title');title.textContent=text;p.append(title);
- for(const event of ['mouseenter','focus','click'])p.addEventListener(event,()=>document.querySelector('#selected').textContent=text);
+let chart;
+Chart.Tooltip.positioners.cursor = function (_elements, position) {
+ return {x: position.x, y: position.y};
+};
+function draw(data) {
+ const currency = document.querySelector('#currency').value;
+ const suffix = currency === 'eur' ? '€' : 'лв.';
+ const key = `implied_${currency}_per_m2`;
+ const last = data.at(-1);
+ document.querySelector('#period').textContent = quarter(last.quarter);
+ document.querySelector('#latest').textContent = `${format(last[key])} ${suffix}/м²`;
+ if (chart) chart.destroy();
+ chart = new Chart(document.querySelector('#chart'), {
+  type: 'line',
+  data: {labels: data.map(d => quarter(d.quarter)), datasets: [{
+   data: data.map(d => d[key]), borderColor: '#287460',
+   backgroundColor: '#2874600d', fill: true, borderWidth: 2,
+   pointRadius: 0, pointHoverRadius: 5, pointHoverBackgroundColor: '#287460',
+  }]},
+  options: {
+   responsive: true, maintainAspectRatio: false, animation: false,
+   interaction: {mode: 'index', intersect: false, axis: 'x'},
+   plugins: {
+    legend: {display: false},
+    tooltip: {position: 'cursor', animation: false, displayColors: false,
+     backgroundColor: '#233b34', padding: 12, cornerRadius: 5,
+     callbacks: {
+      label: context => `${format(context.parsed.y, 2)} ${suffix}/м²`,
+      afterLabel: context => {
+       const change = data[context.dataIndex].quarterly_change_pct;
+       return `${change > 0 ? '+' : ''}${format(change, 1)}% спрямо предходното тримесечие`;
+      },
+     },
+    },
+   },
+   scales: {
+    x: {grid: {display: false}, ticks: {maxRotation: 0, autoSkip: false,
+     callback: (_value, index) => data[index].quarter.endsWith('Q1') &&
+      Number(data[index].quarter.slice(0, 4)) % 2 === 1 ? data[index].quarter.slice(0, 4) : ''}},
+    y: {beginAtZero: true, border: {display: false}, grid: {color: '#e8ece8'},
+     ticks: {callback: value => format(value)}, title: {display: true, text: `${suffix}/м²`}},
+   },
+  },
  });
- document.querySelector('#selected').textContent=`${quarter(last.quarter)} · ${format(last[key],2)} ${suffix}/м²`;
 }
 fetch('data/prices.csv').then(r=>{if(!r.ok)throw Error(r.status);return r.text();}).then(text=>{
  const [header,...lines]=text.trim().split(/\r?\n/);const keys=header.split(',');
