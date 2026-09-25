@@ -51,4 +51,4 @@ fetch('data/prices.csv').then(r=>{if(!r.ok)throw Error(r.status);return r.text()
  if(!data.length||data.some(d=>!Number.isFinite(d.implied_eur_per_m2)||!Number.isFinite(d.implied_bgn_per_m2)))throw Error('Invalid data');
  draw(data);document.querySelector('#currency').addEventListener('change',()=>draw(data));
  for(const d of [...data].reverse()){const tr=document.createElement('tr');for(const v of [quarter(d.quarter),`${format(d.quarterly_change_pct,1)}%`,format(d.implied_eur_per_m2,2),format(d.implied_bgn_per_m2,2)]){const td=document.createElement('td');td.textContent=v;tr.append(td);}document.querySelector('#rows').append(tr);}
-}).catch(()=>{document.querySelector('#error').hidden=false;document.querySelector('#period').textContent='Данните не са достъпни';});
+}).catch(error=>{console.error(error);document.querySelector('#error').hidden=false;document.querySelector('#period').textContent='Данните не са достъпни';});
