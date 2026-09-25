@@ -1,5 +1,5 @@
 const format = (value, digits = 0) => new Intl.NumberFormat('bg-BG', {minimumFractionDigits:digits, maximumFractionDigits:digits}).format(value);
-const quarter = q => { const [year, n] = q.split('-Q'); return `${['I','II','III','IV'][Number(n)-1]} трим. ${year}`; };
+const quarter = q => { const [year, n] = q.split('-Q'); return `${year}, Q${n}`; };
 let chart;
 Chart.Tooltip.positioners.cursor = function (_elements, position) {
  return {x: position.x, y: position.y};
