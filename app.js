@@ -45,7 +45,7 @@ function draw(data) {
       plugins: {
         legend: { display: false },
         tooltip: {
-          position: "cursor",
+          position: "nearest",
           animation: false,
           displayColors: false,
           backgroundColor: "#233b34",
