@@ -137,6 +137,10 @@ main {
   max-width: 680px;
 }
 
+.page-head-wide {
+  max-width: 100%;
+}
+
 .eyebrow {
   font-size: 11px;
   letter-spacing: 0.12em;
