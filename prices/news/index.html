@@ -7,6 +7,28 @@ eyebrow: Цени
 lead: Последни развития и бележки около данните за цените.
 nav_key: prices-news
 ---
-<section class="empty-state">
-  <p>TODO</p>
+<section class="news-listing">
+  <div class="article-card w-100">
+    {% assign news_items = site.price_news | sort: 'date' | reverse %}
+    {% if news_items.size > 0 %}
+      <div class="d-grid gap-3">
+        {% for item in news_items %}
+          <article class="news-item pb-3{% unless forloop.last %} border-bottom{% endunless %}">
+            <p class="eyebrow mb-2">{{ item.date | date: '%d.%m.%Y' }}</p>
+            <h2 class="news-item-title mb-2">
+              <a href="{{ item.url | relative_url }}">{{ item.title }}</a>
+            </h2>
+            {% if item.summary %}
+              <p class="news-item-summary mb-3">{{ item.summary }}</p>
+            {% endif %}
+            <a class="news-item-link" href="{{ item.url | relative_url }}">Прочети статията →</a>
+          </article>
+        {% endfor %}
+      </div>
+    {% else %}
+      <section class="empty-state w-100">
+        <p>Няма публикувани новини.</p>
+      </section>
+    {% endif %}
+  </div>
 </section>
