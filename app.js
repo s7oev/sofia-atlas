@@ -1,3 +1,10 @@
+const chartCanvas = document.querySelector("#chart");
+const currencySelect = document.querySelector("#currency");
+const periodLabel = document.querySelector("#period");
+const latestLabel = document.querySelector("#latest");
+const rowsBody = document.querySelector("#rows");
+const errorLabel = document.querySelector("#error");
+
 const format = (value, digits = 0) =>
   new Intl.NumberFormat("bg-BG", {
     minimumFractionDigits: digits,
@@ -8,19 +15,17 @@ const quarter = (q) => {
   return `${year}, Q${n}`;
 };
 let chart;
-Chart.Tooltip.positioners.cursor = function (_elements, position) {
-  return { x: position.x, y: position.y };
-};
 function draw(data) {
-  const currency = document.querySelector("#currency").value;
+  if (!chartCanvas || !currencySelect || !periodLabel || !latestLabel) return;
+
+  const currency = currencySelect.value;
   const suffix = currency === "eur" ? "€" : "лв.";
   const key = `implied_${currency}_per_m2`;
   const last = data.at(-1);
-  document.querySelector("#period").textContent = quarter(last.quarter);
-  document.querySelector("#latest").textContent =
-    `${format(last[key])} ${suffix}/м²`;
+  periodLabel.textContent = quarter(last.quarter);
+  latestLabel.textContent = `${format(last[key])} ${suffix}/м²`;
   if (chart) chart.destroy();
-  chart = new Chart(document.querySelector("#chart"), {
+  chart = new Chart(chartCanvas, {
     type: "line",
     data: {
       labels: data.map((d) => quarter(d.quarter)),
@@ -84,49 +89,55 @@ function draw(data) {
     },
   });
 }
-fetch("data/prices.csv")
-  .then((r) => {
-    if (!r.ok) throw Error(r.status);
-    return r.text();
-  })
-  .then((text) => {
-    const [header, ...lines] = text.trim().split(/\r?\n/);
-    const keys = header.split(",");
-    const data = lines.map((line) =>
-      Object.fromEntries(
-        line.split(",").map((v, i) => [keys[i], i === 0 ? v : Number(v)]),
-      ),
-    );
-    if (
-      !data.length ||
-      data.some(
-        (d) =>
-          !Number.isFinite(d.implied_eur_per_m2) ||
-          !Number.isFinite(d.implied_bgn_per_m2),
+
+if (chartCanvas) {
+  fetch("data/prices.csv")
+    .then((r) => {
+      if (!r.ok) throw Error(r.status);
+      return r.text();
+    })
+    .then((text) => {
+      const [header, ...lines] = text.trim().split(/\r?\n/);
+      const keys = header.split(",");
+      const data = lines.map((line) =>
+        Object.fromEntries(
+          line.split(",").map((v, i) => [keys[i], i === 0 ? v : Number(v)]),
+        ),
+      );
+      if (
+        !data.length ||
+        data.some(
+          (d) =>
+            !Number.isFinite(d.implied_eur_per_m2) ||
+            !Number.isFinite(d.implied_bgn_per_m2),
+        )
       )
-    )
-      throw Error("Invalid data");
-    draw(data);
-    document
-      .querySelector("#currency")
-      .addEventListener("change", () => draw(data));
-    for (const d of [...data].reverse()) {
-      const tr = document.createElement("tr");
-      for (const v of [
-        quarter(d.quarter),
-        `${format(d.quarterly_change_pct, 1)}%`,
-        format(d.implied_eur_per_m2, 2),
-        format(d.implied_bgn_per_m2, 2),
-      ]) {
-        const td = document.createElement("td");
-        td.textContent = v;
-        tr.append(td);
+        throw Error("Invalid data");
+
+      draw(data);
+      currencySelect?.addEventListener("change", () => draw(data));
+
+      if (rowsBody) {
+        rowsBody.textContent = "";
+        for (const d of [...data].reverse()) {
+          const tr = document.createElement("tr");
+          for (const v of [
+            quarter(d.quarter),
+            `${format(d.quarterly_change_pct, 1)}%`,
+            format(d.implied_eur_per_m2, 2),
+            format(d.implied_bgn_per_m2, 2),
+          ]) {
+            const td = document.createElement("td");
+            td.textContent = v;
+            tr.append(td);
+          }
+          rowsBody.append(tr);
+        }
       }
-      document.querySelector("#rows").append(tr);
-    }
-  })
-  .catch((error) => {
-    console.error(error);
-    document.querySelector("#error").hidden = false;
-    document.querySelector("#period").textContent = "Данните не са достъпни";
-  });
+    })
+    .catch((error) => {
+      console.error(error);
+      if (errorLabel) errorLabel.hidden = false;
+      if (periodLabel) periodLabel.textContent = "Данните не са достъпни";
+    });
+}
