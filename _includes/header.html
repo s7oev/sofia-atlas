@@ -33,14 +33,7 @@
               {% for item in site.data.navigation.price_section.items %}
               <a
                 class="nav-link{% if page.nav_key == item.key %} active{% endif %}"
-                {%
-                if
-                page.nav_key=""
-                ="item.key"
-                %}aria-current="page"
-                {%
-                endif
-                %}
+                {% if page.nav_key == item.key %}aria-current="page"{% endif %}
                 href="{{ item.url | relative_url }}"
               >
                 {{ item.title }}
@@ -51,14 +44,7 @@
           {% for item in site.data.navigation.secondary %}
           <a
             class="nav-link buildings-link{% if page.nav_key == item.key %} active{% endif %}"
-            {%
-            if
-            page.nav_key=""
-            ="item.key"
-            %}aria-current="page"
-            {%
-            endif
-            %}
+            {% if page.nav_key == item.key %}aria-current="page"{% endif %}
             href="{{ item.url | relative_url }}"
           >
             {{ item.title }}
