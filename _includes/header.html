@@ -30,17 +30,10 @@
               class="nav nav-pills price-nav-pills flex-column flex-lg-row"
               role="navigation"
             >
-              {% for item in site.data.navigation.price_section.items %} {%
-              assign is_active = page.nav_key == item.key %}
+              {% for item in site.data.navigation.price_section.items %}
               <a
-                class="nav-link{% if is_active %} active{% endif %}"
-                {%
-                if
-                is_active
-                %}aria-current="page"
-                {%
-                endif
-                %}
+                class="nav-link{% if page.nav_key == item.key %} active{% endif %}"
+                {% if page.nav_key == item.key %}aria-current="page"{% endif %}
                 href="{{ item.url | relative_url }}"
               >
                 {{ item.title }}
@@ -48,17 +41,10 @@
               {% endfor %}
             </div>
           </div>
-          {% for item in site.data.navigation.secondary %} {% assign is_active =
-          page.nav_key == item.key %}
+          {% for item in site.data.navigation.secondary %}
           <a
-            class="nav-link buildings-link{% if is_active %} active{% endif %}"
-            {%
-            if
-            is_active
-            %}aria-current="page"
-            {%
-            endif
-            %}
+            class="nav-link buildings-link{% if page.nav_key == item.key %} active{% endif %}"
+            {% if page.nav_key == item.key %}aria-current="page"{% endif %}
             href="{{ item.url | relative_url }}"
           >
             {{ item.title }}
