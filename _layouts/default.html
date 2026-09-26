@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="{{ page.lang | default: site.lang | default: 'bg' }}">
+  <head>
+    {% include head.html %}
+  </head>
+  <body
+    {% if page.body_class %}
+      class="{{ page.body_class }}"
+    {% endif %}
+  >
+    {% include header.html %}
+    {{ content }}
+    {% include footer.html %}
+  </body>
+</html>

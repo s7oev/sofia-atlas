@@ -1,0 +1,15 @@
+title: Sofia Atlas
+description: Данни и визуализации за пазара на жилища и сградите в София.
+lang: bg
+url: ""
+baseurl: ""
+permalink: pretty
+markdown: kramdown
+theme: null
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
+      image_root: ""
+      body_class: ""

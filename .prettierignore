@@ -2,3 +2,5 @@ vendor/
 data/
 node_modules/
 package-lock.json
+_site/
+.jekyll-cache/

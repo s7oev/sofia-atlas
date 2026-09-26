@@ -2,10 +2,11 @@
   "name": "sofia-atlas",
   "private": true,
   "scripts": {
-    "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format": "prettier --write \"{_includes,_layouts,buildings,prices}/**/*.html\" \"index.html\" \"*.{json,md,yml,yaml,css,js}\" \".vscode/**/*.json\"",
+    "format:check": "prettier --check \"{_includes,_layouts,buildings,prices}/**/*.html\" \"index.html\" \"*.{json,md,yml,yaml,css,js}\" \".vscode/**/*.json\""
   },
   "devDependencies": {
+    "@shopify/prettier-plugin-liquid": "^1.11.1",
     "prettier": "3.9.9"
   }
 }

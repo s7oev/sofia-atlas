@@ -1,0 +1,16 @@
+price_section:
+  label: Цени
+  items:
+    - title: Статистика
+      url: /
+      key: prices-statistics
+    - title: Новини
+      url: /prices/news/
+      key: prices-news
+    - title: Методология
+      url: /prices/methodology/
+      key: prices-methodology
+secondary:
+  - title: Сгради
+    url: /buildings/
+    key: buildings

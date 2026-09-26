@@ -1,125 +1,49 @@
-<!doctype html>
-<html lang="bg">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Sofia Atlas — Цени — Методология</title>
-    <meta
-      name="description"
-      content="Методология за оценката на цените на жилищата в София."
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="../../style.css?v=4" />
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-      crossorigin="anonymous"
-      defer
-    ></script>
-  </head>
-  <body>
-    <header class="site-header">
-      <nav
-        class="navbar navbar-expand-lg site-navbar"
-        aria-label="Основна навигация"
+---
+layout: page
+title: Цени — Методология
+heading: Методология
+description: Методология за оценката на цените на жилищата в София.
+eyebrow: Цени
+lead: Как е изчислена оценката за цените на съществуващите жилища в София.
+page_head_class: page-head-narrow
+nav_key: prices-methodology
+---
+<section class="article-layout">
+  <div class="article-card article-copy">
+    <p>
+      Започваме от последната публикувана цена на НСИ за съществуващи апартаменти в София:
+      <strong>1501,70 лв./м² за 2014, Q4</strong>
+    </p>
+    <p>
+      За всяко следващо тримесечие прилагаме изменението на индекса за
+      <strong>съществуващи жилища в София</strong>. Например ръст от 2% увеличава предходната оценка от 1000 на 1020
+      лв./м². Така измененията се натрупват последователно от началото на 2015 г.
+    </p>
+    <div class="formula">Предходна цена × (1 + промяна / 100)</div>
+    <p>
+      Това показва как би се променила базовата цена, ако следва индекса. Не е оценка за конкретно жилище, квартал или
+      тип строителство. Методологията на НСИ се променя през периода, включително през 2022 г., когато обхватът включва
+      и къщи. Публикуваните изменения са закръглени, а последните данни могат да бъдат ревизирани.
+    </p>
+    <p>
+      Евровата равностойност е изчислена при 1 евро = 1,95583 лева. Цените са номинални — без корекция за инфлацията.
+    </p>
+    <nav class="sources" aria-label="Източници">
+      <a
+        href="https://www.nsi.bg/en/infostat/1423?filters=37205844085f86a49f7cd7bdc20bca54"
+        target="_blank"
+        rel="noopener"
       >
-        <div class="container-fluid px-0">
-          <a class="navbar-brand brand" href="../../">SOFIA <b>ATLAS</b></a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#site-nav"
-            aria-controls="site-nav"
-            aria-expanded="false"
-            aria-label="Покажи навигацията"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="site-nav">
-            <div
-              class="navbar-nav ms-lg-auto align-items-lg-center gap-lg-3 w-100 justify-content-lg-end"
-            >
-              <div class="price-nav-group" aria-label="Подраздели Цени">
-                <span class="price-nav-label">Цени</span>
-                <div
-                  class="nav nav-pills price-nav-pills flex-column flex-lg-row"
-                  role="navigation"
-                >
-                  <a class="nav-link" href="../../">Статистика</a>
-                  <a class="nav-link" href="../news/">Новини</a>
-                  <a class="nav-link active" aria-current="page" href="./"
-                    >Методология</a
-                  >
-                </div>
-              </div>
-              <a class="nav-link buildings-link" href="../../buildings/"
-                >Сгради</a
-              >
-            </div>
-          </div>
-        </div>
-      </nav>
-    </header>
-
-    <main>
-      <section class="page-head page-head-narrow">
-        <p class="eyebrow">Цени</p>
-        <h1>Методология</h1>
-        <p class="lead">
-          Как е изчислена оценката за цените на съществуващите жилища в София.
-        </p>
-      </section>
-
-      <section class="article-layout">
-        <div class="article-card article-copy">
-          <p>
-            Започваме от последната публикувана цена на НСИ за съществуващи
-            апартаменти в София: <strong>1501,70 лв./м² за 2014, Q4</strong>
-          </p>
-          <p>
-            За всяко следващо тримесечие прилагаме изменението на индекса за
-            <strong>съществуващи жилища в София</strong>. Например ръст от 2%
-            увеличава предходната оценка от 1000 на 1020 лв./м². Така
-            измененията се натрупват последователно от началото на 2015 г.
-          </p>
-          <div class="formula">Предходна цена × (1 + промяна / 100)</div>
-          <p>
-            Това показва как би се променила базовата цена, ако следва индекса.
-            Не е оценка за конкретно жилище, квартал или тип строителство.
-            Методологията на НСИ се променя през периода, включително през 2022
-            г., когато обхватът включва и къщи. Публикуваните изменения са
-            закръглени, а последните данни могат да бъдат ревизирани.
-          </p>
-          <p>
-            Евровата равностойност е изчислена при 1 евро = 1,95583 лева. Цените
-            са номинални — без корекция за инфлацията.
-          </p>
-          <nav class="sources" aria-label="Източници">
-            <a
-              href="https://www.nsi.bg/en/infostat/1423?filters=37205844085f86a49f7cd7bdc20bca54"
-              target="_blank"
-              rel="noopener"
-              >Индекси на НСИ ↗</a
-            ><a
-              href="https://www.nsi.bg/en/infostat/1434?filters=af2d7da970edd9de8c8d5226d1bfe136"
-              target="_blank"
-              rel="noopener"
-              >Базова цена ↗</a
-            ><a href="../../data/prices.csv" download>Изтегли данните ↓</a>
-          </nav>
-        </div>
-      </section>
-    </main>
-
-    <footer>
-      <span>SOFIA ATLAS</span><span></span
-      ><a href="https://github.com/s7oev/sofia-atlas">GitHub ↗</a>
-    </footer>
-  </body>
-</html>
+        Индекси на НСИ ↗
+      </a>
+      <a
+        href="https://www.nsi.bg/en/infostat/1434?filters=af2d7da970edd9de8c8d5226d1bfe136"
+        target="_blank"
+        rel="noopener"
+      >
+        Базова цена ↗
+      </a>
+      <a href="{{ '/data/prices.csv' | relative_url }}" download>Изтегли данните ↓</a>
+    </nav>
+  </div>
+</section>
