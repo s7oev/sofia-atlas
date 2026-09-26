@@ -14,7 +14,7 @@ nav_key: prices-news
       <div class="d-grid gap-3">
         {% for item in news_items %}
           <article class="news-item pb-3{% unless forloop.last %} border-bottom{% endunless %}">
-            <p class="eyebrow mb-2">{{ item.date | date: "%d.%m.%Y" }}</p>
+            <p class="eyebrow mb-2">{{ item.date | date: '%d.%m.%Y' }}</p>
             <h2 class="news-item-title mb-2">
               <a href="{{ item.url | relative_url }}">{{ item.title }}</a>
             </h2>
