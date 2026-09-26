@@ -4,6 +4,7 @@ const periodLabel = document.querySelector("#period");
 const latestLabel = document.querySelector("#latest");
 const rowsBody = document.querySelector("#rows");
 const errorLabel = document.querySelector("#error");
+const pricesCsvUrl = window.SOFIA_ATLAS?.pricesCsvUrl;
 
 const format = (value, digits = 0) =>
   new Intl.NumberFormat("bg-BG", {
@@ -90,8 +91,8 @@ function draw(data) {
   });
 }
 
-if (chartCanvas) {
-  fetch("data/prices.csv")
+if (chartCanvas && pricesCsvUrl) {
+  fetch(pricesCsvUrl)
     .then((r) => {
       if (!r.ok) throw Error(r.status);
       return r.text();
@@ -140,4 +141,8 @@ if (chartCanvas) {
       if (errorLabel) errorLabel.hidden = false;
       if (periodLabel) periodLabel.textContent = "Данните не са достъпни";
     });
+} else if (chartCanvas) {
+  if (errorLabel) errorLabel.hidden = false;
+  if (periodLabel) periodLabel.textContent = "Данните не са достъпни";
+  console.error("Missing Sofia Atlas pricesCsvUrl configuration");
 }

@@ -3,7 +3,9 @@
   "private": true,
   "scripts": {
     "format": "prettier --write \"{_includes,_layouts,buildings,prices}/**/*.html\" \"index.html\" \"*.{json,md,yml,yaml,css,js}\" \".vscode/**/*.json\"",
-    "format:check": "prettier --check \"{_includes,_layouts,buildings,prices}/**/*.html\" \"index.html\" \"*.{json,md,yml,yaml,css,js}\" \".vscode/**/*.json\""
+    "format:check": "prettier --check \"{_includes,_layouts,buildings,prices}/**/*.html\" \"index.html\" \"*.{json,md,yml,yaml,css,js}\" \".vscode/**/*.json\"",
+    "build": "bundle exec jekyll build",
+    "serve": "bundle exec jekyll serve"
   },
   "devDependencies": {
     "@shopify/prettier-plugin-liquid": "^1.11.1",

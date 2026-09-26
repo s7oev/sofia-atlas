@@ -6,6 +6,12 @@ description: Статистика за цените на съществуващ�
 eyebrow: Цени
 lead: Как се променят цените на съществуващите жилища в София, проследени чрез индексите на НСИ.
 nav_key: prices-statistics
+extra_head: |
+  <script>
+    window.SOFIA_ATLAS = {
+      pricesCsvUrl: "{{ '/data/prices.csv' | relative_url }}",
+    };
+  </script>
 scripts:
   - src: /vendor/chart.umd.js
   - src: /app.js?v=4

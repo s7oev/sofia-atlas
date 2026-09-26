@@ -1,8 +1,8 @@
 title: Sofia Atlas
 description: Данни и визуализации за пазара на жилища и сградите в София.
 lang: bg
-url: ""
-baseurl: ""
+url: https://s7oev.com
+baseurl: /sofia-atlas
 permalink: pretty
 markdown: kramdown
 theme: null
