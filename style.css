@@ -273,10 +273,6 @@ td:first-child {
   text-align: left;
 }
 
-.article-layout {
-  max-width: 760px;
-}
-
 .article-card {
   padding: 28px;
 }
@@ -301,9 +297,6 @@ td:first-child {
 }
 
 .sources {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 18px;
   font-size: 12px;
   padding-top: 8px;
 }
