@@ -5,14 +5,65 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Sofia Atlas — Сгради</title>
     <meta name="description" content="Сгради в София." />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
     <link rel="stylesheet" href="../style.css?v=4" />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+      defer
+    ></script>
   </head>
   <body>
     <header class="site-header">
-      <a class="brand" href="../">SOFIA <b>ATLAS</b></a>
-      <nav class="primary-nav" aria-label="Основна навигация">
-        <a href="../">Цени</a>
-        <a class="active" href="./">Сгради</a>
+      <nav
+        class="navbar navbar-expand-lg site-navbar"
+        aria-label="Основна навигация"
+      >
+        <div class="container-fluid px-0">
+          <a class="navbar-brand brand" href="../">SOFIA <b>ATLAS</b></a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#site-nav"
+            aria-controls="site-nav"
+            aria-expanded="false"
+            aria-label="Покажи навигацията"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="site-nav">
+            <div
+              class="navbar-nav ms-lg-auto align-items-lg-center gap-lg-3 w-100 justify-content-lg-end"
+            >
+              <div class="price-nav-group" aria-label="Подраздели Цени">
+                <span class="price-nav-label">Цени</span>
+                <div
+                  class="nav nav-pills price-nav-pills flex-column flex-lg-row"
+                  role="navigation"
+                >
+                  <a class="nav-link" href="../">Статистика</a>
+                  <a class="nav-link" href="../prices/news/">Новини</a>
+                  <a class="nav-link" href="../prices/methodology/"
+                    >Методология</a
+                  >
+                </div>
+              </div>
+              <a
+                class="nav-link buildings-link active"
+                aria-current="page"
+                href="./"
+                >Сгради</a
+              >
+            </div>
+          </div>
+        </div>
       </nav>
     </header>
 
