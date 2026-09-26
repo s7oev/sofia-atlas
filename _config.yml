@@ -6,6 +6,10 @@ baseurl: /sofia-atlas
 permalink: pretty
 markdown: kramdown
 theme: null
+collections:
+  price_news:
+    output: true
+    permalink: /prices/news/:name/
 defaults:
   - scope:
       path: ""
@@ -13,3 +17,8 @@ defaults:
       layout: default
       image_root: ""
       body_class: ""
+  - scope:
+      path: ""
+      type: price_news
+    values:
+      layout: news-article

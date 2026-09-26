@@ -1,0 +1,21 @@
+---
+layout: default
+---
+<main>
+  <section class="page-head page-head-narrow">
+    <p class="eyebrow">{{ page.eyebrow | default: 'Цени' }}</p>
+    <h1>{{ page.heading | default: page.title }}</h1>
+    {% if page.summary %}
+      <p class="lead">{{ page.summary }}</p>
+    {% endif %}
+    {% if page.date %}
+      <p class="news-meta mb-0">{{ page.date | date: "%d.%m.%Y" }}</p>
+    {% endif %}
+  </section>
+
+  <section>
+    <article class="article-card article-copy w-100">
+      {{ content }}
+    </article>
+  </section>
+</main>
