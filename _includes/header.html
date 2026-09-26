@@ -1,0 +1,47 @@
+<header class="site-header">
+  <nav class="navbar navbar-expand-lg site-navbar" aria-label="Основна навигация">
+    <div class="container-fluid px-0">
+      <a class="navbar-brand brand" href="{{ '/' | relative_url }}">SOFIA <b>ATLAS</b></a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#site-nav"
+        aria-controls="site-nav"
+        aria-expanded="false"
+        aria-label="Покажи навигацията"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="site-nav">
+        <div class="navbar-nav ms-lg-auto align-items-lg-center gap-lg-3 w-100 justify-content-lg-end">
+          <div class="price-nav-group" aria-label="Подраздели Цени">
+            <span class="price-nav-label">{{ site.data.navigation.price_section.label }}</span>
+            <div class="nav nav-pills price-nav-pills flex-column flex-lg-row" role="navigation">
+              {% for item in site.data.navigation.price_section.items %}
+                {% assign is_active = page.nav_key == item.key %}
+                <a
+                  class="nav-link{% if is_active %} active{% endif %}"
+                  {% if is_active %}aria-current="page"{% endif %}
+                  href="{{ item.url | relative_url }}"
+                >
+                  {{ item.title }}
+                </a>
+              {% endfor %}
+            </div>
+          </div>
+          {% for item in site.data.navigation.secondary %}
+            {% assign is_active = page.nav_key == item.key %}
+            <a
+              class="nav-link buildings-link{% if is_active %} active{% endif %}"
+              {% if is_active %}aria-current="page"{% endif %}
+              href="{{ item.url | relative_url }}"
+            >
+              {{ item.title }}
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>

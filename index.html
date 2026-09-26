@@ -1,138 +1,60 @@
-<!doctype html>
-<html lang="bg">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Sofia Atlas — Цени — Статистика</title>
-    <meta
-      name="description"
-      content="Статистика за цените на съществуващите жилища в София."
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="style.css?v=4" />
-    <script src="vendor/chart.umd.js" defer></script>
-    <script src="app.js?v=4" defer></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-      crossorigin="anonymous"
-      defer
-    ></script>
-  </head>
-  <body>
-    <header class="site-header">
-      <nav
-        class="navbar navbar-expand-lg site-navbar"
-        aria-label="Основна навигация"
-      >
-        <div class="container-fluid px-0">
-          <a class="navbar-brand brand" href="./">SOFIA <b>ATLAS</b></a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#site-nav"
-            aria-controls="site-nav"
-            aria-expanded="false"
-            aria-label="Покажи навигацията"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="site-nav">
-            <div
-              class="navbar-nav ms-lg-auto align-items-lg-center gap-lg-3 w-100 justify-content-lg-end"
-            >
-              <div class="price-nav-group" aria-label="Подраздели Цени">
-                <span class="price-nav-label">Цени</span>
-                <div
-                  class="nav nav-pills price-nav-pills flex-column flex-lg-row"
-                  role="navigation"
-                >
-                  <a class="nav-link active" aria-current="page" href="./"
-                    >Статистика</a
-                  >
-                  <a class="nav-link" href="prices/news/">Новини</a>
-                  <a class="nav-link" href="prices/methodology/">Методология</a>
-                </div>
-              </div>
-              <a class="nav-link buildings-link" href="buildings/">Сгради</a>
-            </div>
-          </div>
-        </div>
-      </nav>
-    </header>
+---
+layout: page
+title: Цени — Статистика
+heading: Статистика
+description: Статистика за цените на съществуващите жилища в София.
+eyebrow: Цени
+lead: Как се променят цените на съществуващите жилища в София, проследени чрез индексите на НСИ.
+nav_key: prices-statistics
+scripts:
+  - src: /vendor/chart.umd.js
+  - src: /app.js?v=4
+---
+<section class="chart-card" aria-label="Цени на жилищата">
+  <div class="chart-top">
+    <div>
+      <p class="eyebrow metric-period" id="period">Зареждане…</p>
+      <p class="value" id="latest">—</p>
+      <p class="muted">Оценена цена за квадратен метър</p>
+    </div>
+    <div class="controls">
+      <label for="currency">Валута</label><select id="currency">
+        <option value="eur">EUR</option>
+        <option value="bgn">BGN</option>
+      </select>
+    </div>
+  </div>
+  <p id="error" role="alert" hidden>
+    Данните не могат да се заредят. Опитайте да презаредите страницата.
+  </p>
+  <div class="chart-wrap">
+    <canvas
+      id="chart"
+      role="img"
+      aria-label="Тримесечни цени на жилищата в София. Стойностите са достъпни и в таблицата по-долу."
+    ></canvas>
+  </div>
+  <div class="chart-bottom">
+    <span>Посочете върху графиката или докоснете за цена по тримесечия.</span>
+    <span>Източник: собствени изчисления по данни на НСИ</span>
+  </div>
+</section>
 
-    <main>
-      <section class="page-head">
-        <p class="eyebrow">Цени</p>
-        <h1>Статистика</h1>
-        <p class="lead">
-          Как се променят цените на съществуващите жилища в София, проследени
-          чрез индексите на НСИ.
-        </p>
-      </section>
-
-      <section class="chart-card" aria-label="Цени на жилищата">
-        <div class="chart-top">
-          <div>
-            <p class="eyebrow metric-period" id="period">Зареждане…</p>
-            <p class="value" id="latest">—</p>
-            <p class="muted">Оценена цена за квадратен метър</p>
-          </div>
-          <div class="controls">
-            <label for="currency">Валута</label
-            ><select id="currency">
-              <option value="eur">EUR</option>
-              <option value="bgn">BGN</option>
-            </select>
-          </div>
-        </div>
-        <p id="error" role="alert" hidden>
-          Данните не могат да се заредят. Опитайте да презаредите страницата.
-        </p>
-        <div class="chart-wrap">
-          <canvas
-            id="chart"
-            role="img"
-            aria-label="Тримесечни цени на жилищата в София. Стойностите са достъпни и в таблицата по-долу."
-          ></canvas>
-        </div>
-        <div class="chart-bottom">
-          <span
-            >Посочете върху графиката или докоснете за цена по тримесечия.</span
-          >
-          <span>Източник: собствени изчисления по данни на НСИ</span>
-        </div>
-      </section>
-
-      <section class="data-section" aria-labelledby="all-quarters-title">
-        <div class="section-heading">
-          <h2 id="all-quarters-title">Всички тримесечия</h2>
-        </div>
-        <div class="table-card table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Тримесечие</th>
-                <th>Промяна</th>
-                <th>EUR/м²</th>
-                <th>BGN/м²</th>
-              </tr>
-            </thead>
-            <tbody id="rows"></tbody>
-          </table>
-        </div>
-      </section>
-    </main>
-
-    <footer>
-      <span>SOFIA ATLAS</span><span></span
-      ><a href="https://github.com/s7oev/sofia-atlas">GitHub ↗</a>
-    </footer>
-  </body>
-</html>
+<section class="data-section" aria-labelledby="all-quarters-title">
+  <div class="section-heading">
+    <h2 id="all-quarters-title">Всички тримесечия</h2>
+  </div>
+  <div class="table-card table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Тримесечие</th>
+          <th>Промяна</th>
+          <th>EUR/м²</th>
+          <th>BGN/м²</th>
+        </tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+</section>
