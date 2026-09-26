@@ -1,0 +1,17 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[html]": {
+    "editor.formatOnSave": false
+  },
+  "[liquid]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "files.associations": {
+    "index.html": "liquid",
+    "buildings/**/*.html": "liquid",
+    "prices/**/*.html": "liquid",
+    "_includes/**/*.html": "liquid",
+    "_layouts/**/*.html": "liquid"
+  }
+}
