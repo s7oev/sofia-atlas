@@ -3,32 +3,44 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Sofia Atlas — Цени на жилищата</title>
+    <title>Sofia Atlas — Цени — Статистика</title>
     <meta
       name="description"
-      content="Как се променят цените на съществуващите жилища в София — оценка по индексите на НСИ."
+      content="Статистика за цените на съществуващите жилища в София."
     />
-    <link rel="stylesheet" href="style.css?v=2" />
+    <link rel="stylesheet" href="style.css?v=4" />
     <script src="vendor/chart.umd.js" defer></script>
-    <script src="app.js?v=3" defer></script>
+    <script src="app.js?v=4" defer></script>
   </head>
   <body>
-    <header>
-      <a class="brand" href="./">SOFIA <b>ATLAS</b></a
-      ><span>Данни за града</span>
+    <header class="site-header">
+      <a class="brand" href="./">SOFIA <b>ATLAS</b></a>
+      <nav class="primary-nav" aria-label="Основна навигация">
+        <a class="active" href="./">Цени</a>
+        <a href="buildings/">Сгради</a>
+      </nav>
     </header>
+
     <main>
-      <section class="intro">
-        <h1>Цени на жилищата в София</h1>
+      <nav class="section-nav" aria-label="Подраздели Цени">
+        <a class="active" href="./">Статистика</a>
+        <a href="prices/news/">Новини</a>
+        <a href="prices/methodology/">Методология</a>
+      </nav>
+
+      <section class="page-head">
+        <p class="eyebrow">Цени</p>
+        <h1>Статистика</h1>
         <p class="lead">
           Как се променят цените на съществуващите жилища в София, проследени
           чрез индексите на НСИ.
         </p>
       </section>
+
       <section class="chart-card" aria-label="Цени на жилищата">
         <div class="chart-top">
           <div>
-            <p class="eyebrow" id="period">Зареждане…</p>
+            <p class="eyebrow metric-period" id="period">Зареждане…</p>
             <p class="value" id="latest">—</p>
             <p class="muted">Оценена цена за квадратен метър</p>
           </div>
@@ -51,54 +63,16 @@
           ></canvas>
         </div>
         <div class="chart-bottom">
-          <span
-            >Посочете върху графиката или докоснете за цена по тримесечия.</span
-          ><span>Източник: собствени изчисления по данни на НСИ (виж методологията по-долу)</span>
+          <span>Посочете върху графиката или докоснете за цена по тримесечия.</span>
+          <span>Източник: собствени изчисления по данни на НСИ</span>
         </div>
       </section>
-      <section class="method">
-        <div><h2>Как е изчислено?</h2></div>
-        <div class="explanation">
-          <p>
-            Започваме от последната публикувана цена на НСИ за съществуващи
-            апартаменти в София: <strong>1501,70 лв./м² за 2014, Q4</strong>
-          </p>
-          <p>
-            За всяко следващо тримесечие прилагаме изменението на индекса за
-            <strong>съществуващи жилища в София</strong>. Например ръст от 2%
-            увеличава предходната оценка от 1000 на 1020 лв./м². Така
-            измененията се натрупват последователно от началото на 2015 г.
-          </p>
-          <div class="formula">Предходна цена × (1 + промяна / 100)</div>
-          <p>
-            Това показва как би се променила базовата цена, ако следва индекса.
-            Не е оценка за конкретно жилище, квартал или тип строителство.
-            Методологията на НСИ се променя през периода, включително през 2022
-            г., когато обхватът включва и къщи. Публикуваните изменения са
-            закръглени, а последните данни могат да бъдат ревизирани.
-          </p>
-          <p>
-            Евровата равностойност е изчислена при 1 евро = 1,95583 лева. Цените
-            са номинални — без корекция за инфлацията.
-          </p>
-          <nav class="sources" aria-label="Източници">
-            <a
-              href="https://www.nsi.bg/en/infostat/1423?filters=37205844085f86a49f7cd7bdc20bca54"
-              target="_blank"
-              rel="noopener"
-              >Индекси на НСИ ↗</a
-            ><a
-              href="https://www.nsi.bg/en/infostat/1434?filters=af2d7da970edd9de8c8d5226d1bfe136"
-              target="_blank"
-              rel="noopener"
-              >Базова цена ↗</a
-            ><a href="data/prices.csv" download>Изтегли данните ↓</a>
-          </nav>
+
+      <section class="data-section" aria-labelledby="all-quarters-title">
+        <div class="section-heading">
+          <h2 id="all-quarters-title">Всички тримесечия</h2>
         </div>
-      </section>
-      <details>
-        <summary>Всички тримесечия</summary>
-        <div class="table-wrap">
+        <div class="table-card table-wrap">
           <table>
             <thead>
               <tr>
@@ -111,8 +85,9 @@
             <tbody id="rows"></tbody>
           </table>
         </div>
-      </details>
+      </section>
     </main>
+
     <footer>
       <span>SOFIA ATLAS</span><span>Независим проект с данни от НСИ.</span
       ><a href="https://github.com/s7oev/sofia-atlas">GitHub ↗</a>

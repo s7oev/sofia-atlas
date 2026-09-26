@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="bg">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Sofia Atlas — Цени — Методология</title>
+    <meta
+      name="description"
+      content="Методология за оценката на цените на жилищата в София."
+    />
+    <link rel="stylesheet" href="../../style.css?v=4" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="../../">SOFIA <b>ATLAS</b></a>
+      <nav class="primary-nav" aria-label="Основна навигация">
+        <a class="active" href="../../">Цени</a>
+        <a href="../../buildings/">Сгради</a>
+      </nav>
+    </header>
+
+    <main>
+      <nav class="section-nav" aria-label="Подраздели Цени">
+        <a href="../../">Статистика</a>
+        <a href="../news/">Новини</a>
+        <a class="active" href="./">Методология</a>
+      </nav>
+
+      <section class="page-head page-head-narrow">
+        <p class="eyebrow">Цени</p>
+        <h1>Методология</h1>
+        <p class="lead">
+          Как е изчислена оценката за цените на съществуващите жилища в София.
+        </p>
+      </section>
+
+      <section class="article-layout">
+        <div class="article-card article-copy">
+          <p>
+            Започваме от последната публикувана цена на НСИ за съществуващи
+            апартаменти в София: <strong>1501,70 лв./м² за 2014, Q4</strong>
+          </p>
+          <p>
+            За всяко следващо тримесечие прилагаме изменението на индекса за
+            <strong>съществуващи жилища в София</strong>. Например ръст от 2%
+            увеличава предходната оценка от 1000 на 1020 лв./м². Така
+            измененията се натрупват последователно от началото на 2015 г.
+          </p>
+          <div class="formula">Предходна цена × (1 + промяна / 100)</div>
+          <p>
+            Това показва как би се променила базовата цена, ако следва индекса.
+            Не е оценка за конкретно жилище, квартал или тип строителство.
+            Методологията на НСИ се променя през периода, включително през 2022
+            г., когато обхватът включва и къщи. Публикуваните изменения са
+            закръглени, а последните данни могат да бъдат ревизирани.
+          </p>
+          <p>
+            Евровата равностойност е изчислена при 1 евро = 1,95583 лева. Цените
+            са номинални — без корекция за инфлацията.
+          </p>
+          <nav class="sources" aria-label="Източници">
+            <a
+              href="https://www.nsi.bg/en/infostat/1423?filters=37205844085f86a49f7cd7bdc20bca54"
+              target="_blank"
+              rel="noopener"
+              >Индекси на НСИ ↗</a
+            ><a
+              href="https://www.nsi.bg/en/infostat/1434?filters=af2d7da970edd9de8c8d5226d1bfe136"
+              target="_blank"
+              rel="noopener"
+              >Базова цена ↗</a
+            ><a href="../../data/prices.csv" download>Изтегли данните ↓</a>
+          </nav>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>SOFIA ATLAS</span><span>Независим проект с данни от НСИ.</span
+      ><a href="https://github.com/s7oev/sofia-atlas">GitHub ↗</a>
+    </footer>
+  </body>
+</html>
