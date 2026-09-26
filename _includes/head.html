@@ -18,6 +18,13 @@
   crossorigin="anonymous"
 />
 <link rel="stylesheet" href="{{ '/style.css?v=4' | relative_url }}" />
+{% if page.prices_data_url %}
+  <script>
+    window.SOFIA_ATLAS = {
+      pricesCsvUrl: {{ page.prices_data_url | relative_url | jsonify }},
+    };
+  </script>
+{% endif %}
 {% if page.extra_head %} {{ page.extra_head }} {% endif %}
 {% if page.scripts %}
   {% for script in page.scripts %}
